@@ -5,7 +5,7 @@ import { User } from "@prisma/client";
 import UserItem, { UserItemSkeleton } from "./user-item";
 
 interface RecomendedProps {
-  data: User[];
+  data: (User & { stream: { isLive: boolean } | null })[];
 }
 
 const Recommended = ({ data }: RecomendedProps) => {
@@ -25,7 +25,7 @@ const Recommended = ({ data }: RecomendedProps) => {
             imageUrl={user.imageUrl}
             username={user.username}
             key={user.id}
-            isLive={true}
+            isLive={user.stream?.isLive}
           />
         ))}
       </ul>
