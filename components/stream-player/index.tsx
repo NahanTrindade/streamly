@@ -4,9 +4,9 @@ import { useViewerToken } from "@/hooks/use-viewer-token";
 import { Stream, User } from "@prisma/client";
 import { LiveKitRoom } from "@livekit/components-react";
 import { useChatSidebar } from "@/store/use-chat-sidebar";
-import { Video } from "./video";
+import { Video, VideoSkeleton } from "./video";
 import { cn } from "@/lib/utils";
-import { Chat } from "./chat";
+import { Chat, ChatSkeleton } from "./chat";
 import { ChatToggle } from "./chat-toggle";
 
 interface StreamPlayerProps {
@@ -15,13 +15,16 @@ interface StreamPlayerProps {
   isFollowing: boolean;
 }
 
-const StreamPlayer = ({ stream, user, isFollowing }: StreamPlayerProps) => {
+export const StreamPlayer = ({
+  stream,
+  user,
+  isFollowing,
+}: StreamPlayerProps) => {
   const { identity, name, token } = useViewerToken(user.id);
-  const { collapsed, onChangeVariant, onCollapse, onExpand, variant } =
-    useChatSidebar();
+  const { collapsed } = useChatSidebar();
 
   if (!token || !name || !identity) {
-    return <div>Cannot watch the Stream</div>;
+    return <StreamPlayerSkeleton />;
   }
   return (
     <>
@@ -57,4 +60,15 @@ const StreamPlayer = ({ stream, user, isFollowing }: StreamPlayerProps) => {
   );
 };
 
-export default StreamPlayer;
+export const StreamPlayerSkeleton = () => {
+  return (
+    <div className="grid grid-cols-1 lg:gap-y-0 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6 h-full">
+      <div className="space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10">
+        <VideoSkeleton />
+      </div>
+      <div className="col-span-1 bg-sidebar">
+        <ChatSkeleton />
+      </div>
+    </div>
+  );
+};
