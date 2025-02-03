@@ -20,7 +20,13 @@ import {
 } from "@/components/ui/select";
 import { IngressInput } from "livekit-server-sdk";
 import { AlertTriangle } from "lucide-react";
-import { ComponentRef, useRef, useState, useTransition } from "react";
+import {
+  ComponentRef,
+  useEffect,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
 import { toast } from "sonner";
 
 const RTMP = String(IngressInput.RTMP_INPUT);
@@ -43,6 +49,10 @@ export const ConnectModal = () => {
         .catch(() => toast.error("Something went wrong"));
     });
   };
+
+  useEffect(() => {
+    closeRef.current?.click();
+  }, [isPending]);
 
   return (
     <Dialog>
@@ -76,7 +86,9 @@ export const ConnectModal = () => {
         </Alert>
         <div className="flex justify-between">
           <DialogClose ref={closeRef} asChild>
-            <Button variant={"ghost"}>Cancel</Button>
+            <Button disabled={isPending} variant={"ghost"}>
+              Cancel
+            </Button>
           </DialogClose>
           <Button disabled={isPending} onClick={onSubmit}>
             Generate
