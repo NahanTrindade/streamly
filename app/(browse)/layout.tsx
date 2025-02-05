@@ -5,9 +5,9 @@ import Container from "./_components/sidebar/container";
 
 const BrowseLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col h-full">
       <Navbar />
-      <div className="flex ">
+      <div className="flex h-full ">
         <Suspense fallback={<SidebarSkeleton />}>
           <Sidebar />
         </Suspense>
