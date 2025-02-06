@@ -10,7 +10,8 @@ interface CreatorLayoutProps {
 }
 
 const DashboardLayout = async ({ children, params }: CreatorLayoutProps) => {
-  const self = await getSelfByUsername(params.username);
+  const { username } = await params;
+  const self = await getSelfByUsername(username);
 
   if (!self) {
     redirect("/");
