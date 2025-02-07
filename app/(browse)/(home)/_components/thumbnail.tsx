@@ -1,3 +1,4 @@
+import LiveBadge from "@/components/live-badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import UserAvatar from "@/components/user-avatar";
 import Image from "next/image";
@@ -16,6 +17,7 @@ export const Thumbnail = ({
   username,
 }: ThumbnailProps) => {
   let content;
+
   if (!src) {
     content = (
       <div className="bg-sidebar flex flex-col items-center justify-center gap-y-4 h-full w-full transition-transform group-hover:translate-x-2 group-hover:-translate-y-1 rounded-md">
@@ -42,6 +44,11 @@ export const Thumbnail = ({
   return (
     <div className="group aspect-video relative rounded-md cursor-pointer">
       {content}
+      {isLive && src && (
+        <div className="absolute top-2 left-2 transition-transform group-hover:translate-x-2 group-hover:-translate-y-1">
+          <LiveBadge />
+        </div>
+      )}
     </div>
   );
 };
