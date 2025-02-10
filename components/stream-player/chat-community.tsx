@@ -6,11 +6,7 @@ import { useDebounceValue } from "usehooks-ts";
 import { Input } from "../ui/input";
 import { ScrollArea } from "../ui/scroll-area";
 import { CommunityItem } from "./community-item";
-import {
-  LocalParticipant,
-  Participant,
-  RemoteParticipant,
-} from "livekit-client";
+import { LocalParticipant, RemoteParticipant } from "livekit-client";
 
 interface ChatCommunityProps {
   viewerName: string;

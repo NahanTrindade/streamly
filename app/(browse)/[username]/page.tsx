@@ -5,7 +5,7 @@ import { getUserByUsername } from "@/lib/user-service";
 import { notFound } from "next/navigation";
 
 interface UserPageProps {
-  params: { username: string };
+  params: Promise<{ username: string }>;
 }
 
 const UserPage = async ({ params }: UserPageProps) => {

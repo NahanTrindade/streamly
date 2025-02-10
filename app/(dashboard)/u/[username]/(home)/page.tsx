@@ -3,7 +3,7 @@ import { getUserByUsername } from "@/lib/user-service";
 import { currentUser } from "@clerk/nextjs/server";
 
 interface CreatorPageProps {
-  params: { username: string };
+  params: Promise<{ username: string }>;
 }
 
 const CreatorPage = async ({ params }: CreatorPageProps) => {
